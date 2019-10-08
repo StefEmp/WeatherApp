@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "WeatherJS";
+}
+
+<h2>What's in the Fridge?</h2>
+Choose your Ingredient!
+
+
+<p id="test">Test</p>
+
+    <input type="text" name='label' id="label">
+    <button onClick="getSearchResult()">Submit</button>
+
+
+<script>
+    function getSearchResult() {
+        var search = document.getElementById("label").value;
+        console.log("https://api.edamam.com/search?q=" + search + "&app_id=a4e57804&app_key=5cd9b1cf4de086d7718f9f95c16ccdb7");
+        
+        jQuery.getJSON("https://api.edamam.com/search?q=" + search + "&app_id=a4e57804&app_key=5cd9b1cf4de086d7718f9f95c16ccdb7", function (data, textStatus, jqXHR) {
+            document.getElementById('test').innerHTML = data.hits[0].recipe.label;
+        })
+        .done(function (data) {
+            alert(data.hits[0].recipe.image);
+        });
+      
+    };
+</script>
+
+

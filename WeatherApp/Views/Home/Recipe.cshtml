@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Recipe";
+}
+
+<h2>Recipe</h2>
+
+<p id="recipe"></p>
+
+<button>Get Recipe</button>
+
+
+<script>
+    $(document).ready(function () {
+        $("button").click(function () {
+            $.get("https://api.edamam.com/search?q=apple&APPID=5cd9b1cf4de086d7718f9f95c16ccdb7", function (response) {
+                console.log(response);
+                $("recipe").text(response.name);
+
+            });
+        });
+    });
+
+</script>
+
