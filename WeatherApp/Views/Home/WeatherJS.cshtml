@@ -4,7 +4,7 @@
 }
 
 <h2>What's in the Fridge?</h2>
-Choose your Ingredient!
+<h4>Choose your Ingredient!</h4>
 
 <ul id="list">
 
@@ -21,19 +21,30 @@ Choose your Ingredient!
         console.log("https://api.edamam.com/search?q=" + search + "&app_id=a4e57804&app_key=5cd9b1cf4de086d7718f9f95c16ccdb7");
             jQuery.getJSON("https://api.edamam.com/search?q=" + search + "&app_id=a4e57804&app_key=5cd9b1cf4de086d7718f9f95c16ccdb7", function (data, textStatus, jqXHR) {
                 for (let i = 0; i < data.hits.length; i++) {
-                  let listItem = document.createElement('li');
+                    let listItem = document.createElement('li');
+
                     let a = document.createElement("a");
-                   a.textContent = data.hits[i].recipe.label;
-                   a.setAttribute('href', data.hits[i].recipe.url);
+                    a.textContent = data.hits[i].recipe.label;
+                    a.setAttribute('href', data.hits[i].recipe.url);
                     listItem.appendChild(a);
+
+               
+  
+                    for (let j = 0; j < data.hits[i].recipe.ingredients.length; j++) {
+                        let p = document.createElement("p");
+                        p.textContent = data.hits[i].recipe.ingredients[j].text;
+                        listItem.appendChild(p);
+                    };
+
 
                     let img = document.createElement('img');
                     img.setAttribute('src', data.hits[i].recipe.image);
-                    listItem.appendChild(img)
+                    listItem.appendChild(img);
                    // listItem.append(<a '<img src=" + data.hits[i].recipe.image + "'></a>);
                   // listItem.appendChild(document.createTextNode(data.hits[i].recipe.label));
+
                     document.getElementById('list').appendChild(listItem);
-                               }
+                };
             })
                 .done;
         
